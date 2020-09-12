@@ -3,27 +3,39 @@ package TD1;
 public class Admin {
 
     private String nom;
+    private Forum forum;
 
     public Admin() {
-    	this(null);
+    	this(null, null);
     }
     
-    public Admin(String n) {
-    	this.nom = n;
-    }
-    
-    //                          Operations                                  
+    public Admin(String n, Forum f) {
+    	this.setNom(n);
+    	this.setForum(f);
+    }                                  
     
     public void knowMembers() {
-        //TODO
+        System.out.println(this.forum.getMembers().toString());
+    }
+    
+    public int knowMembersCount() {
+    	return this.forum.getMembers().size();
     }
     
     
-    public String getForum() {
-        return this.nom;
+    public Forum getForum() {
+        return this.forum;
     }
-    
-    public void setForum(String n) {
-        this.nom = n;
-    }
+
+	public void setForum(Forum forum) {
+		this.forum = forum;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 }

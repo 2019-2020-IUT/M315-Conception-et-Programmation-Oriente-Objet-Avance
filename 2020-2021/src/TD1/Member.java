@@ -23,16 +23,16 @@ public class Member {
 	
 	// Operations
 
-	public void envoyerMessage() {
-		// TODO
+	public void envoyerMessage(Message m) {
+		this.getMsg().add(m);
 	}
 
-	public void effacerMessage() {
-		// TODO
+	public boolean effacerMessage(Message m) {
+		return this.nom.equalsIgnoreCase(m.getAuthor().getNom());
 	}
 
-	public void lireMessage() {
-		// TODO
+	public void lireMessage(List<Message> l) {
+		System.out.println(l.toString());
 	}
 
 	public String getNom() {
@@ -49,5 +49,10 @@ public class Member {
 
 	public void setMsg(List<Message> msg) {
 		this.msg = msg;
+	}
+	
+	@Override
+	public String toString() {
+		return "Membre " + this.getNom() + "\n";
 	}
 }

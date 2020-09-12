@@ -6,7 +6,7 @@ import java.util.Date;
 public class Message {
 
     private String content;
-    private Member destinator;
+    private Member author;
     private Date creationDate;
    
     public Message() {
@@ -17,11 +17,17 @@ public class Message {
     	this(c, null);
     }
     
-    public Message(String c, Member d) {
+    public Message(String c, Member a) {
+    //Un message a un contenu et un'e aut'eur'rice
     	this.content = c;
-    	this.setDestinator(d);
+    	this.setAuthor(a);
     	this.creationDate = Date.from(Instant.now());
 	}
+    
+    @Override
+    public String toString() {
+    	return "Message de <<" + this.getAuthor() + ">> : " + this.getContent() + "\n";
+    }
 
 	public String getContent() {
         return this.content;
@@ -39,11 +45,15 @@ public class Message {
         this.creationDate = creationDate;
     }
 
-	public Member getDestinator() {
-		return destinator;
+	public Member getAuthor() {
+		return this.author;
 	}
 
-	public void setDestinator(Member destinator) {
-		this.destinator = destinator;
-	}    
+	public void setAuthor(Member author) {
+		this.author = author;
+	}
+	
+	public boolean isOutOfDate(int t) {
+		return(this.getCreationDate().compareTo(Date.from(Instant.now())) <= t);
+	}
 }

@@ -1,42 +1,39 @@
 package TD1;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Forum {
 	private String nom;
 	private Admin admin;
-	private MessageManager messageManager;
+	private MessageManager mg;
 	private List<Member> member = new ArrayList<Member>();
-
-	public Forum() {
-		this(null, null, null, null);
-	}
+	private List<Message> lmsg = new ArrayList<Message>();
 	
-	public Forum(String n) {
-		this(n, null, null, null);
-	}
-	
-	public Forum(String n,Admin a, MessageManager mg, List<Member> m) {
+	public Forum(String n, MessageManager msgManager) {
 		this.setNom(n);
-		this.admin=a;
-		this.messageManager=mg;
-		this.member=m;
+		this.setMessageManager(msgManager);
 	}
 	
-	public void createMessage() {
-		// TODO
-	}
-
 	public void createMessageManager() {
-		// TODO
-	}
-
-	public void createUser() {
-		// TODO
+		this.mg = new MessageManager();
 	}
 	
-	public void addMember(Member m) {
+	public Message createMessage(String content, Member auth) {
+		return this.getMessageManager().createMessage(content, auth);
+	}
+
+	public void addMessage(Message msg) {
+		this.getLmsg().add(msg);
+	}
+
+	public void createUser(String name) {
+		this.addMember(new Member(name));
+	}
+	
+	protected void addMember(Member m) {
 		this.getMembers().add(m);
 	}
 
@@ -54,10 +51,12 @@ public class Forum {
 	}
 
 	public MessageManager getMessageManager() {
-		return this.messageManager;
+		return this.mg;
 	}
-
-	// Operations
+	
+	private void setMessageManager(MessageManager msgManager) {
+		this.mg = msgManager;
+	}
 
 	public String getNom() {
 		return nom;
@@ -65,6 +64,21 @@ public class Forum {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public List<Message> getLmsg() {
+		return this.lmsg;
+	}
+	
+	public List<Message> getLatestmsg(Member m) {
+		List<Message> l = new ArrayList<Message>();
+		for (Message msg : this.getLmsg()) {
+			if(msg.getCreationDate().compareTo(Date.from(Instant.now() )) <= 10) {
+				l.add(msg);
+			}
+		}
+		m.lireMessage(l);
+		return l;
 	}
 
 }

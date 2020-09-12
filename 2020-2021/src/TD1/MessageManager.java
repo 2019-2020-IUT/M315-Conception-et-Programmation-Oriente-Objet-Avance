@@ -1,18 +1,23 @@
 package TD1;
 
 public class MessageManager {
-
+	
 	public MessageManager() {
-		
 	}
 	
-	//                          Operations
-	public void createMessage() {
-        //TODO
+	public Message createMessage(String msg, Member auth) {
+        Message m = new Message(msg, auth);
+        auth.envoyerMessage(m);
+        return m;
     }
     
-    public void deleteMessage() {
-        //TODO
+    public boolean deleteMessage(Message msg, Member m) {
+        if(m.effacerMessage(msg)) {
+        	msg = null;
+        	return true;
+        } else {
+        	return false;
+        }
     }
     
     public void posterMessage() {
