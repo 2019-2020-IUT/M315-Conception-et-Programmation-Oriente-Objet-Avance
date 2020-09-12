@@ -53,13 +53,13 @@ class ForumTest {
 		Message pfff = stade.getForum().createMessage("Vous rigolez?", youcef);
 		stade.getForum().addMessage(pfff);
 		messages = stade.getForum().getLatestmsg(youcef);
-		assertEquals(3, messages.size());
+		assertEquals(2, messages.size());////Résultat attendu égal à 2 et non plus à 3 (le message 'PFFF' n'est pas nouveau pour Youcef, il en est l'auteur)
 		messages = stade.getForum().getLatestmsg(youcef);
 		assertEquals(0, messages.size());
 		
 		//Walter demande à lire les nouveaux messages.
 		messages = stade.getForum().getLatestmsg(walter);
-		assertEquals(2, messages.size());
+		assertEquals(1, messages.size());////Résultat attendu égal à 1 et non plus à 2 (cas identique pour le message 'yes' et son auteur Walter)
 		
 		//Walter demande à effacer le message réalisé par Youcef, il n'a pas le droit, cela ne fait rien.
 		messages = stade.getForum().getLmsg();
@@ -76,9 +76,9 @@ class ForumTest {
 		messages = stade.getForum().getLmsg();
 		assertEquals(numberOfMessages-1,messages.size(),"le message a bien été effacé");
 		
-		assertFalse(pfff.isOutOfDate(2));
+		assertFalse(pfff.isOutOfDate(pfff.getCreationDate(),2));
 		Thread.sleep(2001);
-		assertTrue(pfff.isOutOfDate(2));
+		assertTrue(pfff.isOutOfDate(pfff.getCreationDate(),2));
 		//Les messages postés il y a plus de 10mn (adapté la durée pour les tests) sont détruits par “oogle-stade”.
 	}
 

@@ -53,7 +53,11 @@ public class Message {
 		this.author = author;
 	}
 	
-	public boolean isOutOfDate(int t) {
-		return(this.getCreationDate().compareTo(Date.from(Instant.now())) <= t);
+	public boolean isOutOfDate(Date creationDate, int secondsElapsed) {
+		Date d = new Date();
+        long ms = d.getTime();
+        ms = ms - secondsElapsed*1000;
+        d.setTime(ms);
+        return creationDate.before(d);
 	}
 }

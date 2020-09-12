@@ -24,7 +24,7 @@ public class Member {
 	// Operations
 
 	public void envoyerMessage(Message m) {
-		this.getMsg().add(m);
+		this.msg.add(m);
 	}
 
 	public boolean effacerMessage(Message m) {

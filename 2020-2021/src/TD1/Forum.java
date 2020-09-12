@@ -17,16 +17,12 @@ public class Forum {
 		this.setMessageManager(msgManager);
 	}
 	
-	public void createMessageManager() {
-		this.mg = new MessageManager();
-	}
-	
 	public Message createMessage(String content, Member auth) {
 		return this.getMessageManager().createMessage(content, auth);
 	}
 
 	public void addMessage(Message msg) {
-		this.getLmsg().add(msg);
+		this.lmsg.add(msg);
 	}
 
 	public void createUser(String name) {
