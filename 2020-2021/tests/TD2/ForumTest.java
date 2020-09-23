@@ -1,7 +1,6 @@
 package TD2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +30,10 @@ class ForumTest {
 		Admin stade = new Admin("oogle-stade", fm.createForum("OGCN"));
 		stade.getForum().setFm(fm);
 		stade.getForum().createUser("unPseudo");
-		
+	}
+	
+	@Test
+	void forumHasCanal() throws InterruptedException {
 		
 	}
 	

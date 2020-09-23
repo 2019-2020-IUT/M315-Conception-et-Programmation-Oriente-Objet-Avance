@@ -27,8 +27,8 @@ public class ForumManager {
 		} else { //Si un forum avec ce nom existe déjà, il ne se passe rien. (On renvoi le Forum déjà existant 
 			return l.get(index);
 		}
-	}
-
+	} 
+	
 	public List<Forum> getListeForum() {
 		return this.l;
 	}

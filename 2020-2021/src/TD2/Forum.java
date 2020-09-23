@@ -11,7 +11,7 @@ public class Forum {
 	private MessageManager mg;
 	private ForumManager fm;
 	private List<Member> member = new ArrayList<Member>();
-	private List<Message> lmsg = new ArrayList<Message>();
+	private List<Canal> canaux = new ArrayList<Canal>();
 	
 	
 	public Forum(String n) {
@@ -27,8 +27,8 @@ public class Forum {
 		return this.getMessageManager().createMessage(content, auth);
 	}
 
-	public void addMessage(Message msg) {
-		this.lmsg.add(msg);
+	public void addMessage(Message msg, String nomCanal) {
+		this.getCanaux().get(getCanalId(nomCanal)).addMessage(msg);
 	}
 
 	public void createUser(String i) {
@@ -77,17 +77,14 @@ public class Forum {
 		this.nom = nom;
 	}
 
-	public List<Message> getLmsg() {
-		return this.lmsg;
-	}
 	
-	public List<Message> getLatestmsg(Member m) {
+	public List<Message> getLatestmsg(Member m, String canalName) {
 		List<Message> l = new ArrayList<Message>();
-		for (Message msg : this.getLmsg()) {
-			if(msg.getCreationDate().compareTo(Date.from(Instant.now() )) <= 10) {
-				l.add(msg);
+			for (Message msg : this.getCanaux().get(getCanalId(canalName)).getLmsg()) {
+				if(msg.getCreationDate().compareTo(Date.from(Instant.now() )) <= 10) {
+					l.add(msg);
+				}
 			}
-		}
 		m.lireMessage(l);
 		return l;
 	}
@@ -135,6 +132,30 @@ public class Forum {
 		} else if (!nom.equals(other.nom))
 			return false;
 		return true;
+	}
+
+	public int getCanalId(String nomCanal) {
+		int index = -1;
+		for(int i = 0; i < this.getCanaux().size(); i++) {
+			if(this.getCanaux().get(i).getNomCanal().equalsIgnoreCase(nomCanal)) {
+				index = i;
+			}
+		}
+		return index;
+	}
+	
+	/**
+	 * @return the canal
+	 */
+	public List<Canal> getCanaux() {
+		return canaux;
+	}
+
+	/**
+	 * @param canaux the canal to set
+	 */
+	public void setCanaux(List<Canal> canaux) {
+		this.canaux = canaux;
 	}
 	
 }
