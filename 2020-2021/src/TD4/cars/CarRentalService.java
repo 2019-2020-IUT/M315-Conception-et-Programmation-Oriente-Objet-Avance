@@ -2,8 +2,10 @@ package TD4.cars;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import TD4.core.Service4PI;
 import TD4.util.DateTools;
 import TD4.util.NotPossibleCarRentalException;
 
@@ -17,22 +19,14 @@ import TD4.util.NotPossibleCarRentalException;
  *
  * 
  */
-public class CarRentalService {
+public class CarRentalService extends Service4PI<CarRental> {
 
 	//Set of cars for rent
 	private List<Car> cars;
-	
-	//All registered car rentals
-	private List<CarRental> carRentals = new ArrayList<>();
-
-
-
-	
-
 
 	//To create a car rental service,  you need to have cars.
 	public CarRentalService(List<Car> cars) {
-		super();
+		super(new ArrayList<>());
 		this.cars = cars;
 	}
 
@@ -55,7 +49,7 @@ public class CarRentalService {
 	
 
 	private boolean isAvailable(Car c, LocalDate[] dates) {
-		for (CarRental carRental : carRentals) {
+		for (CarRental carRental : super.payingItemList) {
 			if (c.equals(carRental.getCar()) &&
 				(carRental.includeADate(dates)) ) {
 				return false;	
@@ -81,9 +75,18 @@ public class CarRentalService {
 		LocalDate[] dates = DateTools.getDays(fromDate, numberOfDays);
 		if (isAvailable(c, dates)) {
 			carRental = new CarRental(c, fromDate, numberOfDays);
-			carRentals.add(carRental);
+			super.payingItemList.add(carRental);
 		}
 		return carRental;
+	}
+	
+	public List<CarRental> sortedByPrice() {
+		super.payingItemList.sort(Comparator.comparing(CarRental::getPrice));
+		return new ArrayList<>(super.payingItemList);
+	}
+	
+	public CarRental getCarRentalWithBestPrice() {
+		return this.sortedByPrice().get(0);
 	}
 	
 	

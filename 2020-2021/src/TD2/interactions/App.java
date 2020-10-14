@@ -8,10 +8,11 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-    	Controleur controleur;
+    	@SuppressWarnings("unused")
+		Controleur controleur;
 		try {
 			controleur = new Controleur();
-	    	controleur.start();
+	    	//controleur.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
