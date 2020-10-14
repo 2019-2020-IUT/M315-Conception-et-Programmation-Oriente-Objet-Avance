@@ -3,6 +3,7 @@ package TD2;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ForumManager {
 
 	private List<Forum> l;
@@ -32,5 +33,7 @@ public class ForumManager {
 	public List<Forum> getListeForum() {
 		return this.l;
 	}
+
 	
+
 }
