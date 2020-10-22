@@ -1,7 +1,7 @@
 package TD4.travel;
 
 public class Trip implements Product {
-	
+
 	private Description desc;
 	
 	public Trip(Description d) {
@@ -12,10 +12,15 @@ public class Trip implements Product {
 		return .0;	
 	}
 	
-	public void addItem() {
+	public void addItem(Product p) {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Trip [desc=" + desc + "]";
+	}
+	
 	/**
 	 * @return the desc
 	 */
