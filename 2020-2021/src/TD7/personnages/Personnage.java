@@ -64,9 +64,9 @@ public abstract class Personnage {
 		int damage = this.getForce() - p.getProtection();
 		
 		if(damage > 0) {
-			System.out.print(this.getNom() + this.getHp() + " a attaqué " + p.getNom()  + p.getHp() + ".");
+			System.out.print(this.getNom() + "(" + this.getHp() + ")" + " a attaqué " + p.getNom()  + "(" + p.getHp() + ")" + ".");
 			p.getDamage(damage);
-			System.out.println(" " + p.getNom() + " a perdu " + damage + " HP" + p.getHp() + "!");
+			System.out.println(" " + p.getNom() + " a perdu " + damage + " HP " + "(" + p.getHp() + ")!");
 		} else {
 			System.out.println(this.getNom() + " a attaqué " + p.getNom() +" et n'a pris aucun dégats.");
 		}
