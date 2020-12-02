@@ -1,10 +1,19 @@
 package TD7;
 
+/**
+ * @ Author: CrewmateGroup (Kitabdjian Léo - Longuemare Hugo - Rizzo Michael - Srifi Pauline)
+ * @ Copyright: Creative Common 4.0 (CC BY 4.0)
+ * @ Create Time: 25-11-2020 13:50
+ */
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import TD7.armes.Arme;
+import TD7.personnages.Elfe;
 import TD7.personnages.Orc;
+import TD7.personnages.Personnage;
 import TD7.personnages.Tauren;
 
 
@@ -31,10 +40,20 @@ public class testArmes {
 		assertEquals(w, w1);
 		Personnage azag = new Orc("Azag", 5);
 		try {
-			assertEquals(Class.forName("td5.p1.arme.Epée"), azag.getArme().getClass());
+			assertEquals(Class.forName("TD7.armes.Epee"), azag.getArmeCourante().getClass());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	@Test
+	public void test3() {
+		Elfe a = new Elfe("a", "3");
+		Elfe b = new Elfe("b", "3");
+		
+		for (int i = 0; i < 5; ++i) {
+			a.attaquer(b);
+		}
 	}
 	
 	/*
